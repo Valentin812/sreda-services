@@ -293,7 +293,7 @@ body{font-family:var(--body)}
 <h2 id="lead-title">Записаться на обратный звонок</h2><p class="lead-lead">Регистрация не нужна. Оставьте контакты, и специалист свяжется с вами.</p>
 <form class="lead-form" id="lead-form" novalidate>
 <input name="name" placeholder="ФИО" autocomplete="name" required><input name="phone" type="tel" placeholder="Телефон" autocomplete="tel" required><input name="email" type="email" placeholder="Электронная почта" autocomplete="email"><input name="company" placeholder="Компания" autocomplete="organization"><input name="position" placeholder="Должность"><input name="staff" type="number" min="1" placeholder="Количество сотрудников">
-<label class="lead-consent"><input type="checkbox" name="consent" required><span>Нажимая кнопку «Отправить», я даю согласие на обработку персональных данных</span></label>
+<input name="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;padding:0;border:0"><label class="lead-consent"><input type="checkbox" name="consent" required><span>Нажимая кнопку «Отправить», я даю согласие на обработку персональных данных</span></label>
 <button class="button button-blue" type="submit">Отправить</button>
 <p class="lead-note" id="lead-note"></p></form></div></div>
 <script>(function(){var m=document.getElementById('lead-modal'),f=document.getElementById('lead-form'),n=document.getElementById('lead-note');
@@ -306,5 +306,10 @@ f.addEventListener('submit',function(e){e.preventDefault();var ok=true;
 if(!f.elements.consent.checked)ok=false;
 n.classList.add('show');
 if(!ok){n.textContent='Заполните ФИО и телефон и подтвердите согласие.';return}
-/* TODO: подключить приём заявок (CRM / Telegram / e-mail). Сейчас данные никуда не отправляются. */
-n.textContent='МАКЕТ: форма заполнена верно, но отправка ещё не подключена — заявка никуда не передана.'})})();</script></body></html>
+var LEAD_ENDPOINT='https://script.google.com/macros/s/AKfycbzSfE1mlDxdAx4oU8gloIZLnd5qQeFznhriCGg_BYwly6KVBr5G9UYtihaPQJPGdMrG/exec'; /* ВСТАВЬТЕ СЮДА адрес веб-приложения Apps Script (https://script.google.com/macros/s/.../exec) */
+var btn=f.querySelector('button[type=submit]');
+if(!LEAD_ENDPOINT){n.textContent='МАКЕТ: форма заполнена верно, но отправка ещё не подключена — заявка никуда не передана.';return}
+if(f.elements.hp&&f.elements.hp.value){return}
+var data={};['name','phone','email','company','position','staff'].forEach(function(k){data[k]=f.elements[k].value.trim()});data.page=location.pathname;
+btn.disabled=true;n.textContent='Отправляем…';
+fetch(LEAD_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)}).then(function(){n.textContent='Спасибо! Заявка отправлена, специалист свяжется с вами.';f.reset();btn.disabled=false}).catch(function(){n.textContent='Не удалось отправить заявку. Попробуйте ещё раз или позвоните нам.';btn.disabled=false})})})();</script></body></html>
