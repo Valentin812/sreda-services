@@ -17,6 +17,12 @@
    "name": "Аккредитивы",
    "summary": "Безопасные расчеты по сделке",
    "page": "accreditives.html"
+  },
+  {
+   "id": "colver",
+   "name": "COLVER",
+   "summary": "ИИ-контроль звонков и переписок в продажах",
+   "page": "colver.html"
   }
  ]
 }
