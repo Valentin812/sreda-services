@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://valentin812.github.io/sreda-services/sitemap.xml
