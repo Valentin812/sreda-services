@@ -1,17 +1,22 @@
 {
-  "_help": "Чтобы добавить продукт: добавьте объект в products. Страница продукта: файл из поля page (например new-service.html).",
-  "products": [
-    {
-      "id": "registration",
-      "name": "Электронная регистрация",
-      "summary": "Подача документов в Росреестр в электронном виде без посещения МФЦ",
-      "page": "registration.html"
-    },
-    {
-      "id": "accreditives",
-      "name": "Аккредитивы",
-      "summary": "Безопасные расчеты по сделке",
-      "page": "accreditives.html"
-    }
-  ]
+ "_help": "Чтобы добавить продукт: добавьте объект в products. Страница продукта: файл из поля page (например new-service.html).",
+ "products": [
+  {
+   "id": "registration",
+   "name": "Электронная регистрация",
+   "summary": "Подача документов в Росреестр в электронном виде без посещения МФЦ",
+   "page": "registration.html",
+   "price": {
+    "value": 3000,
+    "label": "",
+    "note": "Стоимость электронной регистрации"
+   }
+  },
+  {
+   "id": "accreditives",
+   "name": "Аккредитивы",
+   "summary": "Безопасные расчеты по сделке",
+   "page": "accreditives.html"
+  }
+ ]
 }
